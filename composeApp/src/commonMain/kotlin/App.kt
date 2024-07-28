@@ -1,3 +1,4 @@
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import kmpktortest.composeapp.generated.resources.Res
+import kmpktortest.composeapp.generated.resources.censor_text
+import kmpktortest.composeapp.generated.resources.hello_world
+import kmpktortest.composeapp.generated.resources.samples
 import kotlinx.coroutines.launch
 import networking.InsultCensorClient
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import util.NetworkError
 import util.onError
@@ -50,13 +57,15 @@ fun App(client: InsultCensorClient) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         ) {
+            Image(painter = painterResource(Res.drawable.samples), contentDescription = "Image")
+            Text(stringResource(Res.string.hello_world))
             TextField(
                 value = unCensoredText,
                 onValueChange = { unCensoredText = it },
                 modifier = Modifier.padding(horizontal = 16.dp)
                     .fillMaxWidth(),
                 placeholder = {
-                    Text("Enter text to censor")
+                    Text(stringResource((Res.string.censor_text)))
                 }
             )
             Button(onClick = {
